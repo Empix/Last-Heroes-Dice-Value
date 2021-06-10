@@ -1,11 +1,3 @@
-/*
-  Falha crítica (100)
-  Falha (número maior que o atributo)
-  Normal (número do dado que fica entre o valor do Bom e do atributo (no caso de 30 = 30-16)
-  Bom (Metade do atributo, fica entre o extremo e o normal, no caso do 30 = 15 - 7)
-  Extremo (Quinto do atributo, que que vai ficar entre o quinto e o 2, já que 1 é crítico)
-*/
-
 const resultElement = document.querySelector(".result");
 const attributeInput = document.querySelector("#attribute");
 const diceInput = document.querySelector("#dice");
