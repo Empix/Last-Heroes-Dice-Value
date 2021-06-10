@@ -6,8 +6,8 @@ attributeInput.addEventListener("input", refreshResultElement);
 diceInput.addEventListener("input", refreshResultElement);
 
 function refreshResultElement() {
-  const diceValue = diceInput.value;
-  const attributeValue = attributeInput.value;
+  const diceValue = parseInt(diceInput.value);
+  const attributeValue = parseInt(attributeInput.value);
 
   const result = getResult(diceValue, attributeValue);
 
@@ -48,9 +48,9 @@ function getResult(dice, attribute) {
 }
 
 // let string = "";
-// const attr = 40;
+// const attr = 10;
 // string += `Atributo: ${attr}\n`;
 // for (let i = 1; i <= 100; i++) {
-//   string += getResult(i, attr);
+//   string += getResult(i, attr) + " - Dado: " + i + "\n";
 // }
 // console.log(string);
