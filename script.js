@@ -15,7 +15,7 @@ function refreshResultElement() {
 }
 
 function getResult(dice, attribute) {
-  if (!dice || !attribute) {
+  if (isNaN(dice) || isNaN(attribute)) {
     return "...";
   }
 
