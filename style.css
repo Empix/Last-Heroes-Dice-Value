@@ -1,5 +1,5 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 /* Reset */
 * {
@@ -7,11 +7,11 @@
   margin: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-  background-color: #1e2329;
+  background-color: #302d2e;
 }
 
 /* Wrapper */
@@ -26,10 +26,10 @@ body {
 
 .box {
   color: #eee;
-  background-color: #22272e;
+  background-color: #2e2a2b;
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid #373e47;
+  border: 2px solid #4d494a;
 
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ body {
   width: 100%;
   text-align: center;
   font-size: 1.6em;
-  color: #1c95e6;
+  color: #e61c3e;
   margin-bottom: 10px;
 }
 
@@ -51,11 +51,11 @@ body {
 .box input {
   width: 100%;
   padding: 8px 16px;
-  background-color: #1c212880;
+  background-color: #2c292a80;
   border: none;
   color: #eee;
   font-size: 1.2em;
-  border: 2px solid #373e47;
+  border: 2px solid #494547;
   border-radius: 10px;
 
   -moz-appearance: textfield;
