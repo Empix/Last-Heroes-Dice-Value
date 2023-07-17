@@ -24,7 +24,7 @@ function getResult(dice, attribute) {
   const quinto = attribute / 5;
 
   if (dice === 100) {
-    return `FALHA CRÍTICA`;
+    return `DESASTRE`;
   } else if (dice > total || total === 0) {
     return `FALHA`;
   } else if (dice === 1) {
