@@ -1,19 +1,3 @@
-const resultElement = document.querySelector('.result');
-const attributeInput = document.querySelector('#attribute');
-const diceInput = document.querySelector('#dice');
-
-attributeInput.addEventListener('input', refreshResultElement);
-diceInput.addEventListener('input', refreshResultElement);
-
-function refreshResultElement() {
-  const diceValue = parseInt(diceInput.value);
-  const attributeValue = parseInt(attributeInput.value);
-
-  const result = getResult(diceValue, attributeValue);
-
-  resultElement.innerHTML = result;
-}
-
 function getResult(dice, attribute) {
   if (isNaN(dice) || isNaN(attribute)) {
     return '...';
@@ -37,11 +21,121 @@ function getResult(dice, attribute) {
     return `EXTREMO`;
   }
 }
+let attributeResult = '...';
+let proficiencyResult = '...';
 
-// let string = '';
-// const attr = 10;
-// string += `Atributo: ${attr}\n`;
-// for (let i = 1; i <= 100; i++) {
-//   string += getResult(i, attr) + ' - Dado: ' + i + '\n';
-// }
-// console.log(string);
+function startInputs(valueFieldId, diceFieldId, resultFieldId, onRefresh) {
+  const resultElement = document.querySelector(`#${resultFieldId}`);
+  const valueInput = document.querySelector(`#${valueFieldId}`);
+  const diceInput = document.querySelector(`#${diceFieldId}`);
+
+  function refreshResultElement() {
+    const diceValue = parseInt(diceInput.value);
+    const attributeValue = parseInt(valueInput.value);
+
+    const result = getResult(diceValue, attributeValue);
+
+    resultElement.innerHTML = result;
+    onRefresh(result);
+  }
+
+  valueInput.addEventListener('input', refreshResultElement);
+  diceInput.addEventListener('input', refreshResultElement);
+}
+
+const finalResultElement = document.querySelector(`#final-result`);
+
+startInputs('proficiency-1', 'dice-1', 'result-1', (value) => {
+  proficiencyResult = value;
+  finalResultElement.innerHTML = getFinalResult();
+});
+startInputs('attribute-1', 'dice-2', 'result-2', (value) => {
+  attributeResult = value;
+  finalResultElement.innerHTML = getFinalResult();
+});
+
+/*
+Desastre + Desastre = Super Desastre
+Desastre + Falha = Desastre
+Desastre + Normal/Bom/Extremo = Falha
+Desastre + Crítico = Normal
+
+Normal + Desastre = Desastre
+Normal + Falha = Normal
+Normal + Normal/Bom/Extremo = Bom
+Normal + Crítico = Crítico
+
+Bom + Desastre = Desastre
+Bom + Falha/Normal = Bom
+Bom + Bom/Extremo = Extremo
+Bom + Crítico = Crítico
+
+Extremo + Desastre = Desastre
+Extremo + Falha/Normal/Bom = Extremo
+Extremo + Extremo = Crítico
+Extremo + Crítico = Crítico
+
+Crítico + Desastre = Normal
+Crítico + Falha/Normal/Bom/Extremo = Crítico
+Crítico + Crítico = Super Crítico
+
+Falha + Falha = Falha
+
+DESASTRE > FALHA > NORMAL > BOM > EXTREMO > CRÍTICO
+*/
+function getFinalResult() {
+  /** Attribute > Proficiency */
+  const results = {
+    CRÍTICO: {
+      CRÍTICO: 'SUPER CRÍTICO',
+      EXTREMO: 'CRÍTICO',
+      BOM: 'CRÍTICO',
+      NORMAL: 'CRÍTICO',
+      FALHA: 'CRÍTICO',
+      DESASTRE: 'NORMAL',
+    },
+    EXTREMO: {
+      CRÍTICO: 'CRÍTICO',
+      EXTREMO: 'CRÍTICO',
+      BOM: 'EXTREMO',
+      NORMAL: 'EXTREMO',
+      FALHA: 'EXTREMO',
+      DESASTRE: 'DESASTRE',
+    },
+    BOM: {
+      CRÍTICO: 'CRÍTICO',
+      EXTREMO: 'EXTREMO',
+      BOM: 'EXTREMO',
+      NORMAL: 'BOM',
+      FALHA: 'BOM',
+      DESASTRE: 'DESASTRE',
+    },
+    NORMAL: {
+      CRÍTICO: 'CRÍTICO',
+      EXTREMO: 'BOM',
+      BOM: 'BOM',
+      NORMAL: 'BOM',
+      FALHA: 'NORMAL',
+      DESASTRE: 'DESASTRE',
+    },
+    FALHA: {
+      CRÍTICO: 'CRÍTICO',
+      EXTREMO: 'EXTREMO',
+      BOM: 'BOM',
+      NORMAL: 'NORMAL',
+      FALHA: 'FALHA',
+      DESASTRE: 'DESASTRE',
+    },
+    DESASTRE: {
+      CRÍTICO: 'NORMAL',
+      EXTREMO: 'FALHA',
+      BOM: 'FALHA',
+      NORMAL: 'FALHA',
+      FALHA: 'DESASTRE',
+      DESASTRE: 'SUPER DESASTRE',
+    },
+  };
+
+  const result = results[attributeResult]?.[proficiencyResult];
+  return result || '...';
+}

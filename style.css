@@ -13,9 +13,10 @@
 body {
   background-color: #111111;
   background-image: url('bg.png');
-  background-position: center;
+  background-position: bottom left;
   background-repeat: no-repeat;
-  background-size: 1520px auto;
+  background-size: cover;
+  overflow: hidden;
 }
 
 /* Wrapper */
@@ -29,35 +30,60 @@ body {
 }
 
 .box {
-  color: #7f7f7f;
-  background-color: #262626;
+  width: 680px;
+  height: 370px;
+
+  color: #62fcda;
+  background-color: #42107e;
   padding: 40px;
   border-radius: 10px;
-  border: 4px solid #000;
 
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
+}
 
-  box-shadow: -10px -10px 0 #202020 inset;
+.box .border {
+  top: -60px;
+  left: -50px;
+  width: calc(100% + 110px);
+  height: calc(100% + 120px);
+  position: absolute;
+  pointer-events: none;
+  background-image: url('border.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .box .title {
   width: 100%;
   text-align: center;
   font-size: 1.6em;
-  color: #ff0000;
+  color: rgb(0, 255, 255);
   margin-bottom: 10px;
   animation: glow 2s ease-in-out infinite alternate;
 }
 
+.box .final-result {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  color: #ff00f2;
+  margin-bottom: 10px;
+}
+
 @keyframes glow {
   from {
-    text-shadow: 0px 0 10px rgb(255, 0, 0, 0.5), 0 0 30px rgb(255, 0, 0, 0.5);
+    text-shadow: 0px 0 10px rgb(0, 255, 255, 0.5),
+      0 0 30px rgb(0, 255, 255, 0.5);
   }
   to {
-    text-shadow: 0px 0 10px rgb(255, 0, 0, 0.5), 0 0 30px rgb(255, 0, 0, 0.5),
-      0 0 60px rgb(255, 0, 0, 0.5), 0 0 100px rgb(255, 0, 0, 0.3);
+    text-shadow: 0px 0 10px rgb(0, 255, 255, 0.5),
+      0 0 30px rgb(0, 255, 255, 0.5), 0 0 60px rgb(0, 255, 255, 0.5),
+      0 0 100px rgb(0, 255, 255, 0.3);
   }
 }
 
@@ -68,18 +94,18 @@ body {
 .box input {
   width: 100%;
   padding: 8px 16px;
-  background-color: #171717;
+  background-color: #2b104d;
   border: none;
   color: #eee;
   font-size: 1.2em;
   border-radius: 10px;
-  border: 2px solid #000;
+  border: 2px solid #1e0e31;
 
   -moz-appearance: textfield;
 }
 
 .box input::placeholder {
-  color: #464646;
+  color: rgba(49, 201, 168, 0.8);
 }
 
 .box input::-webkit-outer-spin-button,
@@ -92,4 +118,15 @@ body {
   text-align: center;
   font-size: 1.6em;
   margin-top: 10px;
+}
+
+.input-container {
+  display: flex;
+  gap: 35px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
