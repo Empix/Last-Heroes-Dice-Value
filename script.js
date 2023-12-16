@@ -120,10 +120,10 @@ function getFinalResult() {
     },
     FALHA: {
       CRÍTICO: 'CRÍTICO',
-      EXTREMO: 'EXTREMO',
-      BOM: 'BOM',
+      EXTREMO: 'NORMAL',
+      BOM: 'NORMAL',
       NORMAL: 'NORMAL',
-      FALHA: 'FALHA',
+      FALHA: 'DESASTRE',
       DESASTRE: 'DESASTRE',
     },
     DESASTRE: {
@@ -136,6 +136,6 @@ function getFinalResult() {
     },
   };
 
-  const result = results[attributeResult]?.[proficiencyResult];
+  const result = results[proficiencyResult]?.[attributeResult];
   return result || '...';
 }
